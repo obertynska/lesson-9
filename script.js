@@ -187,7 +187,6 @@ salary.addEventListener('input', function (event) {
 
 });
 rangePeriod.addEventListener('input', function(event){
-	console.log(event.target.value);
 	rangePeriodAmount.textContent = event.target.value;
 });
 
