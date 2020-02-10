@@ -71,7 +71,6 @@ let appData = {
 
 		rangePeriod.addEventListener('change', function(event){
 			incomeValueOfPeriod.value = appData.calcPeriod();
-			rangePeriodAmount.textContent = event.target.value;
 		});
 
 
