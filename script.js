@@ -51,7 +51,7 @@ let appData = {
 	start: function () {
 		buttonCalculate.style.display ='none';
 		buttonCancel.style.display ='block';
-		buttonCancel.addEventListener('click', this.blockLeftInputs);
+		buttonCancel.addEventListener('click', this.reset);
 
 		this.budget = +salary.value;
 		this.getExpenses();
@@ -178,7 +178,7 @@ let appData = {
 		return this.budgetMonth * rangePeriod.value;
 	},
 	blockLeftInputs: function () {
-		let inputs = document.querySelector('.data').document.querySelectorAll('input[type=text]');
+		let inputs = document.querySelector('.data').querySelectorAll('input[type=text]');
 		inputs.forEach(function(item){
 			item.disabled = true;
 		});
@@ -188,10 +188,12 @@ let appData = {
 		});
 	},
 	reset: function () {
-		let inputs = document.querySelector('.data').document.querySelectorAll('input[type=text]');
+		let inputs = document.querySelector('.data').querySelectorAll('input[type=text]');
 		inputs.forEach(function(item){
 			item.value = '';
+			item.disabled = false;
 		});
+
 	}
 };
 
@@ -209,7 +211,8 @@ rangePeriod.addEventListener('input', function(event){
 	rangePeriodAmount.textContent = event.target.value;
 });
 
-buttonCalculate.addEventListener('click', appData.start.bind(appData));
+buttonCalculate.addEventListener('click', appData.start.bind(appData), true);
+buttonCalculate.addEventListener('click', appData.blockLeftInputs, true);
 
 expensesPlus.addEventListener('click', appData.addExpensesBlock);
 
