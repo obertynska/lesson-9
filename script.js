@@ -32,6 +32,8 @@ let isNumber = function(n){
 	return !isNaN(parseFloat(n)) && isFinite(n) ;
 };
 
+buttonCalculate.disabled = true;
+
 let appData = {
 	budget: 0,
 	budgetDay: 0,
@@ -46,7 +48,6 @@ let appData = {
 	percentDeposit: 0,
 	moneyDeposit: 0,
 	start: function () {
-        
 		appData.budget = +salary.value;
 		console.log(salary.value);
 
@@ -67,6 +68,11 @@ let appData = {
 		addIncomesValues.value = appData.addIncome.join(', ');
 		targetMonth.value = Math.ceil(appData.getTargetMonth());
 		incomeValueOfPeriod.value = appData.calcPeriod();
+
+		rangePeriod.addEventListener('change', function(event){
+			incomeValueOfPeriod.value = appData.calcPeriod();
+			rangePeriodAmount.textContent = event.target.value;
+		});
 
 
 	},
@@ -168,28 +174,27 @@ let appData = {
 	calcPeriod: function () {
 		return appData.budgetMonth * rangePeriod.value;
 	},
-	getPeriod: function(event){
-		rangePeriodAmount.textContent = event.target.value;
-	},
-	validation: function(){
-		if(salary.value === ''){
-			buttonCalculate.disabled = true;
-		} else{
-			buttonCalculate.disabled = false;
-			/*buttonCalculate.addEventListener('click', appData.start);*/
-		}
+};
 
+
+
+salary.addEventListener('input', function (event) {
+	if (event.target.value.trim() !== '') {
+		buttonCalculate.disabled = false;
+	} else {
+		buttonCalculate.disabled = true;
 	}
 
-};    
+});
 
-buttonCalculate.addEventListener('click', appData.validation);
+
+buttonCalculate.addEventListener('click', appData.start);
 
 expensesPlus.addEventListener('click', appData.addExpensesBlock);
 
 incomesPlus.addEventListener('click', appData.addIncomesBlock);
 
-rangePeriod.addEventListener('change', appData.getPeriod);
+
 
 
 
