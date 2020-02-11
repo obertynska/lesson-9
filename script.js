@@ -53,6 +53,7 @@ let appData = {
 		buttonCancel.style.display ='block';
 		buttonCancel.addEventListener('click', this.reset);
 
+
 		this.budget = +salary.value;
 		this.getExpenses();
 		this.getIncome();
@@ -193,6 +194,27 @@ let appData = {
 			item.value = '';
 			item.disabled = false;
 		});
+		rangePeriodAmount.textContent = "1";
+		rangePeriod.value = "1";
+		buttonCancel.style.display ='none';
+		buttonCalculate.style.display ='block';
+
+		let addedIncomesBlock = document.querySelector('.income');
+		let addedIncomes = document.querySelectorAll('.income-items');
+		console.log(addedIncomes);
+        console.log(addedIncomes.length);
+		/*if(addedIncomes.length === 3){
+			addedIncomesBlock[0].removeChild(addedIncomes[1]);
+			addedIncomesBlock[0].removeChild(addedIncomes[2]);
+		}else if(addedIncomes.length === 2){
+			addedIncomesBlock[0].removeChild(addedIncomes[1]);
+		}else{
+			alert('only one');
+		}*/
+		for(let i = 1; i<addedIncomes.lenght; i++){
+			addedIncomesBlock.removeChild(addedIncomes[i]);
+		}
+
 
 	}
 };
