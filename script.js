@@ -63,6 +63,7 @@ let appData = {
 		this.getBudget();
 
 		this.showResult();
+		this.blockLeftInputs();
 
 	},
 	showResult: function(){
@@ -93,9 +94,9 @@ let appData = {
 			let itemExpences = item.querySelector('.expenses-title').value;
 			let cashExpences = item.querySelector('.expenses-amount').value;
 			if(itemExpences !== '' && cashExpences !== ''){
-				appData.expenses[itemExpences] = cashExpences;
+				this.expenses[itemExpences] = cashExpences;
 			}
-		});
+		},this);
 	},
 	addIncomesBlock: function(){
 		let cloneExpensesItem = incomeItems[0].cloneNode(true); 
@@ -112,12 +113,12 @@ let appData = {
 			let itemIncome = item.querySelector('.income-title').value;
 			let cashIncome = item.querySelector('.income-amount').value;
 			if(itemIncome !== '' && cashIncome !== ''){
-				appData.income[itemIncome] = cashIncome;
+				this.income[itemIncome] = cashIncome;
 			}
-		});
+		},this);
 		
-		for( let key in appData.income){
-			appData.incomeMonth += +appData.income[key];
+		for( let key in this.income){
+			this.incomeMonth += +this.income[key];
 		}
 
 	},
@@ -126,25 +127,25 @@ let appData = {
 		additionalExpenses.forEach(function(item){
 			item = item.trim();
 			if(item !== ''){
-				appData.addExpenses.push(item);
+				this.addExpenses.push(item);
 			}
-		})
+		}, this);
 	},   
 	getAddIncomes: function(){
 		possibleIncomesNames.forEach(function(item){
 			let itemValue = item.value.trim();
 			if(itemValue !== ''){
-				appData.addIncome.push(itemValue);
+				this.addIncome.push(itemValue);
 			};
-		});
+		}, this);
 	}, 
 	getExpensesMonth: function () {
-		for (let key in appData.expenses) {
-			appData.expensesMonth += +appData.expenses[key];
+		for (let key in this.expenses) {
+			this.expensesMonth += +this.expenses[key];
 		}
 	},
 	getBudget: function () {
-		this.budgetMonth = this.budget + appData.incomeMonth - this.expensesMonth;
+		this.budgetMonth = this.budget + this.incomeMonth - this.expensesMonth;
 		this.budgetDay = Math.floor(this.budgetMonth / 30);
 	},
 
@@ -160,19 +161,6 @@ let appData = {
 			console.log("К сожалению у вас уровень дохода ниже среднего :sleepy:");
 		} else {
 			console.log("Что то пошло не так 🧐");
-		}
-	},
-	getInfoDeposit: function(){
-		/*appData.deposit = confirm("Есть ли у вас депозит в банке?");
-		*/
-		if(appData.deposit){
-			do {
-				appData.percentDeposit = prompt("Какой годовой процент?", "10");
-			} while(!isNumber(appData.percentDeposit));
-
-			do {
-				appData.moneyDeposit = prompt("Какая сумма заложена?", 10000);
-			}while(!isNumber(appData.moneyDeposit));
 		}
 	},
 	calcPeriod: function () {
@@ -201,20 +189,26 @@ let appData = {
 
 		let addedIncomesBlock = document.querySelector('.income');
 		let addedIncomes = document.querySelectorAll('.income-items');
-		console.log(addedIncomes);
-        console.log(addedIncomes.length);
-		/*if(addedIncomes.length === 3){
-			addedIncomesBlock[0].removeChild(addedIncomes[1]);
-			addedIncomesBlock[0].removeChild(addedIncomes[2]);
-		}else if(addedIncomes.length === 2){
-			addedIncomesBlock[0].removeChild(addedIncomes[1]);
-		}else{
-			alert('only one');
-		}*/
-		for(let i = 1; i<addedIncomes.lenght; i++){
+
+
+		for(let i = 1; i<addedIncomes.length; i++){
 			addedIncomesBlock.removeChild(addedIncomes[i]);
 		}
 
+		let addedExpensesBlock = document.querySelector('.expenses');
+		let addedExpenses = document.querySelectorAll('.expenses-items');
+
+
+		for(let i = 1; i<addedExpenses.length; i++){
+			addedExpensesBlock.removeChild(addedExpenses[i]);
+		}
+
+
+		let btnPlus = document.querySelectorAll('.btn_plus');
+			btnPlus.forEach(function(item){
+			item.style.display = 'block';
+			item.disabled = false;
+		});
 
 	}
 };
@@ -234,7 +228,7 @@ rangePeriod.addEventListener('input', function(event){
 });
 
 buttonCalculate.addEventListener('click', appData.start.bind(appData), true);
-buttonCalculate.addEventListener('click', appData.blockLeftInputs, true);
+/*buttonCalculate.addEventListener('click', appData.blockLeftInputs, true);*/
 
 expensesPlus.addEventListener('click', appData.addExpensesBlock);
 
@@ -258,7 +252,7 @@ incomesPlus.addEventListener('click', appData.addIncomesBlock);
     console.log(`Наша программа включает в себя данные: + key + , значение данных: ` + appData[key]);
 }*/
 
-appData.getInfoDeposit();
+
 
 
 
