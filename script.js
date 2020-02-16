@@ -73,20 +73,14 @@ AppData.prototype.start = function () {
 	buttonCalculate.style.display ='none';
 	buttonCancel.style.display ='block';
 
-	/*buttonCancel.addEventListener('click', this.reset);*/
-
-
 	this.budget = +salary.value;
 	this.getExpInc();
 	this.getExpensesMonth();
 	this.getAddExpenses();
 	this.getAddIncomes();
 	this.getBudget();
-	
 
 	this.showResult();
-	/*this.blockLeftInputs();*/
-
 };
 
 
@@ -114,16 +108,6 @@ AppData.prototype.addExpensesBlock = function(){
 	}
 };
 
-/*AppData.prototype.getExpenses = function(){
-	expensesItems.forEach(function(item){
-		let itemExpences = item.querySelector('.expenses-title').value;
-		let cashExpences = item.querySelector('.expenses-amount').value;
-		if(itemExpences !== '' && cashExpences !== ''){
-			this.expenses[itemExpences] = cashExpences;
-		}
-	},this);
-};*/
-
 AppData.prototype.addIncomesBlock = function(){
 	let cloneExpensesItem = incomeItems[0].cloneNode(true); 
 	incomeItems[0].parentNode.insertBefore(cloneExpensesItem, incomesPlus);
@@ -150,23 +134,6 @@ AppData.prototype.getExpInc = function(){
 		this.incomeMonth += +this.income[key]
 	}
 };
-
-
-/*AppData.prototype.getIncome = function(){
-
-	incomeItems.forEach(function(item){
-		let itemIncome = item.querySelector('.income-title').value;
-		let cashIncome = item.querySelector('.income-amount').value;
-		if(itemIncome !== '' && cashIncome !== ''){
-			this.income[itemIncome] = cashIncome;
-		}
-	},this);
-
-	for( let key in this.income){
-		this.incomeMonth += +this.income[key];
-	}
-
-};*/
 
 AppData.prototype.getAddExpenses = function(){
 	let additionalExpenses = possibleExpenses.value.split(',');
