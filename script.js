@@ -198,6 +198,7 @@ AppData.prototype.calcPeriod = function () {
 	return this.budgetMonth * rangePeriod.value;
 };
 AppData.prototype.reset = function () {
+
 	let inputs = document.querySelector('.data').querySelectorAll('input[type=text]');
 	inputs.forEach(function(item){
 		item.value = '';
@@ -232,30 +233,40 @@ AppData.prototype.reset = function () {
 
 	});
 
-	
 };
 
+AppData.prototype.eventsListeners = function(){
 
+buttonCalculate.addEventListener('click', this.start.bind(this));
 
+expensesPlus.addEventListener('click', this.addExpensesBlock);
 
-const appData = new AppData();
-console.log(appData);
+incomesPlus.addEventListener('click', this.addIncomesBlock);
 
-
-buttonCalculate.addEventListener('click', appData.start.bind(appData));
-
-expensesPlus.addEventListener('click', appData.addExpensesBlock);
-
-incomesPlus.addEventListener('click', appData.addIncomesBlock);
-
-salary.addEventListener('keyup', appData.check);
+salary.addEventListener('keyup', this.check);
 
 
 rangePeriod.addEventListener('input', function(event){
 	rangePeriodAmount.textContent = event.target.value;
 });
 
-buttonCancel.addEventListener('click', appData.reset.bind(appData));
+buttonCancel.addEventListener('click', this.reset.bind(appData));
+
+
+};
+
+
+
+
+const appData = new AppData();
+
+appData.eventsListeners();
+
+
+
+
+
+
 
 
 
