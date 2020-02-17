@@ -1,28 +1,28 @@
 'use strict';
 
-let buttonCalculate = document.getElementById("start");
-let buttonCancel = document.getElementById("cancel");
-let incomesPlus = document.getElementsByTagName("button")[0];
-let expensesPlus = document.getElementsByTagName("button")[1];
-let checkBox = document.querySelector("#deposit-check");
-let checkMark = document.querySelector(".deposit-checkmark");
-let possibleIncomesNames = document.querySelectorAll(".additional_income-item");
-let budgetDay = document.getElementsByClassName("budget_day-value")[0];
-let expensesMonth = document.getElementsByClassName("expenses_month-value")[0];
-let addIncomesValues = document.getElementsByClassName("additional_income-value")[0];
-let addExpensesValues = document.getElementsByClassName("additional_expenses-value")[0];
-let incomeValueOfPeriod = document.getElementsByClassName("income_period-value")[0];
-let targetMonth = document.getElementsByClassName("target_month-value")[0];
-let budgetMonth = document.querySelector(".budget_month-value");
-let salary = document.querySelector(".salary-amount");
-let addIncomeName = document.querySelectorAll(".income-title")[1];
-let addIncomeNameAmount = document.querySelector(".income-amount");
-let obligatoryExpensesName = document.querySelectorAll(".expenses-title")[1];
+const buttonCalculate = document.getElementById("start");
+const buttonCancel = document.getElementById("cancel");
+const incomesPlus = document.getElementsByTagName("button")[0];
+const expensesPlus = document.getElementsByTagName("button")[1];
+const checkBox = document.querySelector("#deposit-check");
+const checkMark = document.querySelector(".deposit-checkmark");
+const possibleIncomesNames = document.querySelectorAll(".additional_income-item");
+const budgetDay = document.getElementsByClassName("budget_day-value")[0];
+const expensesMonth = document.getElementsByClassName("expenses_month-value")[0];
+const addIncomesValues = document.getElementsByClassName("additional_income-value")[0];
+const addExpensesValues = document.getElementsByClassName("additional_expenses-value")[0];
+const incomeValueOfPeriod = document.getElementsByClassName("income_period-value")[0];
+const targetMonth = document.getElementsByClassName("target_month-value")[0];
+const budgetMonth = document.querySelector(".budget_month-value");
+const salary = document.querySelector(".salary-amount");
+const addIncomeName = document.querySelectorAll(".income-title")[1];
+const addIncomeNameAmount = document.querySelector(".income-amount");
+const obligatoryExpensesName = document.querySelectorAll(".expenses-title")[1];
 let expensesItems = document.querySelectorAll(".expenses-items");
-let possibleExpenses = document.querySelector(".additional_expenses-item");
-let targetAmount = document.querySelector(".target-amount");
-let rangePeriod = document.querySelector(".period-select");
-let rangePeriodAmount = document.querySelector(".period-amount");
+const possibleExpenses = document.querySelector(".additional_expenses-item");
+const targetAmount = document.querySelector(".target-amount");
+const rangePeriod = document.querySelector(".period-select");
+const rangePeriodAmount = document.querySelector(".period-amount");
 let incomeItems = document.querySelectorAll('.income-items');
 
 
@@ -83,12 +83,12 @@ class AppData {
 		targetMonth.value = Math.ceil(this.getTargetMonth());
 		incomeValueOfPeriod.value = this.calcPeriod();
 
-		rangePeriod.addEventListener('change', event =>{
-			incomeValueOfPeriod.value = appData.calcPeriod();
+		rangePeriod.addEventListener('change', () =>{
+			incomeValueOfPeriod.value = this.calcPeriod();
 		});
 	}
 	addExpensesBlock(){
-		let cloneExpensesItem = expensesItems[0].cloneNode(true);
+		const cloneExpensesItem = expensesItems[0].cloneNode(true);
 		expensesItems[0].parentNode.insertBefore(cloneExpensesItem, expensesPlus);
 		expensesItems = document.querySelectorAll(".expenses-items");
 
@@ -98,7 +98,7 @@ class AppData {
 	}
 
 	addIncomesBlock(){
-		let cloneExpensesItem = incomeItems[0].cloneNode(true);
+		const cloneExpensesItem = incomeItems[0].cloneNode(true);
 		incomeItems[0].parentNode.insertBefore(cloneExpensesItem, incomesPlus);
 		incomeItems = document.querySelectorAll(".income-items");
 
@@ -125,7 +125,7 @@ class AppData {
 	}
 
 	getAddExpenses(){
-		let additionalExpenses = possibleExpenses.value.split(',');
+		const additionalExpenses = possibleExpenses.value.split(',');
 		additionalExpenses.forEach(item => {
 			item = item.trim();
 			if(item !== ''){
@@ -162,17 +162,7 @@ class AppData {
 	getTargetMonth() {
 		return targetAmount.value / this.budgetMonth;
 	}
-	getStatusIncome() {
-		if (this.budgetDay >= 1200) {
-			console.log("У вас высокий уровень дохода 🤑");
-		} else if (this.budgetDay >= 600 && this.budgetDay < 1200) {
-			console.log("У вас средний уровень дохода :wink:");
-		} else if (this.budgetDay >= 0 && this.budgetDay < 600) {
-			console.log("К сожалению у вас уровень дохода ниже среднего :sleepy:");
-		} else {
-			console.log("Что то пошло не так 🧐");
-		}
-	}
+
 	calcPeriod() {
 		return this.budgetMonth * rangePeriod.value;
 	}
@@ -189,7 +179,7 @@ class AppData {
 		buttonCancel.style.display ='none';
 		buttonCalculate.style.display ='block';
 
-		let addedIncomesBlock = document.querySelector('.income');
+		const addedIncomesBlock = document.querySelector('.income');
 		const addedIncomes = document.querySelectorAll('.income-items');
 
 
@@ -197,7 +187,7 @@ class AppData {
 			addedIncomesBlock.removeChild(addedIncomes[i]);
 		}
 
-		let addedExpensesBlock = document.querySelector('.expenses');
+		const addedExpensesBlock = document.querySelector('.expenses');
 		const addedExpenses = document.querySelectorAll('.expenses-items');
 
 
