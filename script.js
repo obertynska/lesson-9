@@ -55,7 +55,7 @@ class AppData {
 			start.setAttribute('disabled', 'true');
 			return;
 		}
-		let allInput = document.querySelectorAll('.data input[type = text');
+		const allInput = document.querySelectorAll('.data input[type = text');
 		allInput.forEach(item =>{
 			item.setAttribute('disabled', 'true');
 		});
@@ -178,7 +178,7 @@ class AppData {
 	}
 	reset() {
 
-		let inputs = document.querySelectorAll('input[type=text]');
+		const inputs = document.querySelectorAll('input[type=text]');
 		inputs.forEach(item =>{
 			item.value = '';
 			item.removeAttribute('disabled');
@@ -190,7 +190,7 @@ class AppData {
 		buttonCalculate.style.display ='block';
 
 		let addedIncomesBlock = document.querySelector('.income');
-		let addedIncomes = document.querySelectorAll('.income-items');
+		const addedIncomes = document.querySelectorAll('.income-items');
 
 
 		for(let i = 1; i<addedIncomes.length; i++){
@@ -198,7 +198,7 @@ class AppData {
 		}
 
 		let addedExpensesBlock = document.querySelector('.expenses');
-		let addedExpenses = document.querySelectorAll('.expenses-items');
+		const addedExpenses = document.querySelectorAll('.expenses-items');
 
 
 		for(let i = 1; i<addedExpenses.length; i++){
@@ -206,7 +206,7 @@ class AppData {
 		}
 
 
-		let btnPlus = document.querySelectorAll('.btn_plus');
+		const btnPlus = document.querySelectorAll('.btn_plus');
 		btnPlus.forEach(item =>{
 			item.style.display = 'block';
 			item.removeAttribute('disabled');
