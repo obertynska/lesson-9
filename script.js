@@ -210,6 +210,8 @@ class AppData {
 
 		depositCheck.checked = false;
 		
+		depositCheck.checked = false;
+		depositBank.value = '';
 		depositBank.style.display  = 'none';
 		depositAmount.style.display = 'none';
 		depositPercent.style.display = 'none';
@@ -240,7 +242,7 @@ class AppData {
 		if (selectValue === 'other'){
 			depositPercent.value = '';
 			depositPercent.style.display = 'inline-block';
-			depositPercent.addEventListener('keyup', ()=>{
+			depositPercent.addEventListener('input', ()=>{
 				if(depositPercent.value > 100 || depositPercent.value < 0 || isNaN(parseFloat(depositPercent.value))){
 					alert('Введите корректное значение в поле проценты');
 					start.setAttribute('disabled', 'true');
