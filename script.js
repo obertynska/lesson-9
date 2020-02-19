@@ -207,6 +207,13 @@ class AppData {
 
 		});
 
+
+		depositCheck.checked = false;
+		
+		depositBank.style.display  = 'none';
+		depositAmount.style.display = 'none';
+		depositPercent.style.display = 'none';
+
 		this.budget = 0;
 		this.budgetDay = 0;
 		this.budgetMonth = 0;
@@ -237,6 +244,7 @@ class AppData {
 				if(depositPercent.value > 100 || depositPercent.value < 0 || isNaN(parseFloat(depositPercent.value))){
 					alert('Введите корректное значение в поле проценты');
 					start.setAttribute('disabled', 'true');
+					depositPercent.value = '';
 				} else{
 					start.removeAttribute('disabled');
 				}
@@ -256,8 +264,10 @@ class AppData {
 		} else {
 			depositBank.style.display  = 'none';
 			depositAmount.style.display = 'none';
+			depositPercent.style.display = 'none';
 			depositBank.value = '';
 			depositAmount.value = '';
+			depositPercent.value = '';
 			this.deposit = false;
 			depositBank.removeEventListener('change', this.changePercent);
 		}
